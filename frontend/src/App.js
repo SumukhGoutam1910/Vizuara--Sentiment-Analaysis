@@ -12,6 +12,8 @@ import ParticleSystem from './components/ParticleSystem';
 import MagicalBackground from './components/MagicalBackground';
 import FloatingCharacter from './components/FloatingCharacter';
 import InteractiveCard, { StoryCard, ExerciseCard, AchievementCard, CharacterCard } from './components/InteractiveCard';
+import Notification from './components/Notification';
+import BackgroundMusic from './components/BackgroundMusic';
 import apiService from './services/apiService';
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
   const [showGame, setShowGame] = useState(false);
   const [floatingCharacters, setFloatingCharacters] = useState([]);
   const [apiStatus, setApiStatus] = useState('checking');
+  const [showNotification, setShowNotification] = useState(true);
 
   const steps = [
     { component: Welcome, title: "Welcome to Emotion Detective!", theme: 'story' },
@@ -113,6 +116,16 @@ function App() {
 
   return (
     <div className="App">
+      {/* Notification */}
+      <Notification
+        message="Due to free use of render the Gemini API calls may get delayed due to instance spin down after inactivity!"
+        isVisible={showNotification}
+        onClose={() => setShowNotification(false)}
+      />
+
+      {/* Background Music */}
+      <BackgroundMusic />
+
       {/* Magical Background */}
       <MagicalBackground
         theme={currentTheme}

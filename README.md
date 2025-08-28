@@ -38,7 +38,6 @@ Vizura transforms complex AI concepts into an engaging detective adventure where
 graph TB
     A[Frontend - React] --> B[Backend - Node.js]
     B --> C[Gemini AI API]
-    B --> D[Database]
     A --> E[Particle System]
     A --> F[Floating Characters]
     A --> G[Interactive Components]

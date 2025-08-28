@@ -1,0 +1,484 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #FF6B9D 0%, #C44569 25%, #F7DC6F 50%, #7FB069 75%, #4ECDC4 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header Styles */
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 4px solid #FF6B9D;
+  padding: 25px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.title-section {
+  text-align: center;
+}
+
+.app-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(45deg, #FF6B9D, #4ECDC4, #F7DC6F, #7FB069);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleRainbow 4s ease-in-out infinite;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+  letter-spacing: 2px;
+}
+
+@keyframes titleRainbow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.app-subtitle {
+  font-size: 1.4rem;
+  color: #666;
+  margin: 15px 0 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 700px;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #FF6B9D;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #4ECDC4, #F7DC6F, #7FB069);
+  background-size: 200% 100%;
+  border-radius: 20px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: progressFlow 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes progressFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.progress-text {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.api-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.connected {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.status-indicator.checking {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.status-indicator.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.game-toggle {
+  background: linear-gradient(135deg, #FF6B9D, #C44569);
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 15px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+  position: relative;
+  overflow: hidden;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.game-toggle:hover::before {
+  left: 100%;
+}
+
+.game-toggle:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Game Overlay */
+.game-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-game {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: rgba(255, 107, 157, 0.9);
+  border: 3px solid white;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 20;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.close-game:hover {
+  background: rgba(255, 107, 157, 1);
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+}
+
+/* Footer */
+.app-footer {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 4px solid #4ECDC4;
+  padding: 40px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #666;
+}
+
+.footer-content p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.footer-achievements {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.achievement-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.achievement-badge {
+  font-size: 2rem;
+  padding: 10px;
+  background: linear-gradient(135deg, #FF6B9D, #4ECDC4);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: achievementPulse 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.achievement-badge:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+@keyframes achievementPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Button Styles */
+.btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4ECDC4, #7FB069);
+  color: white;
+  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(78, 205, 196, 0.6);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #F7DC6F, #FF6B9D);
+  color: white;
+  box-shadow: 0 6px 20px rgba(247, 220, 111, 0.4);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(247, 220, 111, 0.6);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #7FB069, #4ECDC4);
+  color: white;
+  box-shadow: 0 6px 20px rgba(127, 176, 105, 0.4);
+}
+
+.btn-success:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(127, 176, 105, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .app-subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .header-content {
+    padding: 0 15px;
+    gap: 20px;
+  }
+  
+  .app-header {
+    padding: 20px 0;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .game-toggle {
+    padding: 12px 24px;
+    font-size: 1rem;
+    display: none; /* Hide mini game button on mobile */
+  }
+  
+  .app-main {
+    padding: 30px 15px;
+  }
+  
+  .progress-bar {
+    max-width: 500px;
+    height: 18px;
+  }
+  
+  .progress-fill {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .app-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+  }
+  
+  .header-content {
+    padding: 0 10px;
+    gap: 15px;
+  }
+  
+  .app-header {
+    padding: 15px 0;
+  }
+  
+  .progress-bar {
+    height: 16px;
+    max-width: 400px;
+  }
+  
+  .progress-fill {
+    border-radius: 16px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+  
+  .game-toggle {
+    display: none; /* Hide mini game button on mobile */
+  }
+}
+
+@media (max-width: 360px) {
+  .app-title {
+    font-size: 1.8rem;
+  }
+  
+  .app-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .header-content {
+    padding: 0 8px;
+  }
+  
+  .progress-bar {
+    max-width: 350px;
+    height: 14px;
+  }
+  
+  .progress-fill {
+    border-radius: 14px;
+  }
+  
+  .game-toggle {
+    display: none; /* Hide mini game button on mobile */
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .game-toggle {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

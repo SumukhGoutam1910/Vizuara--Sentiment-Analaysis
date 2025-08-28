@@ -378,7 +378,7 @@ POST /api/sentiment
 - **Documentation**: [Wiki](https://github.com/yourusername/vizura/wiki)
 - **Issues**: [GitHub Issues](https://github.com/yourusername/vizura/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/vizura/discussions)
-- **Email**: support@vizura.com
+- **Email**: sumukhgoutam0804@gmail.com
 
 ## 📄 **License**
 
@@ -404,10 +404,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ for young learners**
+**Made with ❤️ for young learners by Sumukh Goutam**
 
 *Empowering the next generation of AI enthusiasts through interactive storytelling*
-
-[![Vizura Logo](https://via.placeholder.com/200x80/4ECDC4/FFFFFF?text=VIZURA)](https://github.com/yourusername/vizura)
 
 </div>

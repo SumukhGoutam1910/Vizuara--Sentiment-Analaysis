@@ -31,6 +31,7 @@ function App() {
   const [floatingCharacters, setFloatingCharacters] = useState([]);
   const [apiStatus, setApiStatus] = useState('checking');
   const [showNotification, setShowNotification] = useState(true);
+  const [showProjectsDropdown, setShowProjectsDropdown] = useState(false);
 
   const steps = [
     { component: Welcome, title: "Welcome to Emotion Detective!", theme: 'story' },
@@ -110,6 +111,46 @@ function App() {
 
   const getProgressPercentage = () => {
     return ((currentStep + 1) / steps.length) * 100;
+  };
+
+  // Projects data for the dropdown
+  const projects = [
+    {
+      name: "Vizura - AI Sentiment Analysis",
+      description: "Interactive learning platform for 6th graders",
+      status: "Active",
+      tech: "React, Node.js, Gemini AI",
+      url: "https://github.com/yourusername/vizura",
+      icon: "🕵️‍♀️"
+    },
+    {
+      name: "Project Alpha",
+      description: "Advanced machine learning algorithms",
+      status: "In Development",
+      tech: "Python, TensorFlow, React",
+      url: "https://github.com/yourusername/project-alpha",
+      icon: "🤖"
+    },
+    {
+      name: "DataViz Dashboard",
+      description: "Real-time data visualization platform",
+      status: "Completed",
+      tech: "D3.js, Node.js, MongoDB",
+      url: "https://github.com/yourusername/dataviz-dashboard",
+      icon: "📊"
+    },
+    {
+      name: "EcoTracker",
+      description: "Environmental impact monitoring app",
+      status: "Planning",
+      tech: "Flutter, Firebase, IoT",
+      url: "https://github.com/yourusername/ecotracker",
+      icon: "🌱"
+    }
+  ];
+
+  const toggleProjectsDropdown = () => {
+    setShowProjectsDropdown(!showProjectsDropdown);
   };
 
   const CurrentComponent = steps[currentStep].component;
@@ -210,6 +251,71 @@ function App() {
               </button>
             )}
           </div>
+
+          {/* Projects Dropdown - Positioned at top right */}
+          <div className="projects-dropdown">
+            <button
+              className="cyberpunk-projects-toggle"
+              onClick={toggleProjectsDropdown}
+              title="View My Other Projects"
+            >
+              <span className="cyberpunk-text">PROJECTS</span>
+              <span className="cyberpunk-glow"></span>
+            </button>
+            
+            {showProjectsDropdown && (
+              <div className="cyberpunk-projects-menu">
+                <div className="cyberpunk-projects-header">
+                  <h3 className="cyberpunk-title">🚀 MY PROJECTS</h3>
+                  <button 
+                    className="cyberpunk-close"
+                    onClick={toggleProjectsDropdown}
+                    title="Close Projects Menu"
+                  >
+                    ✕
+                  </button>
+                </div>
+                
+                <div className="cyberpunk-projects-list">
+                  {projects.map((project, index) => (
+                    <div key={index} className="cyberpunk-project-item">
+                      <div className="cyberpunk-project-icon">{project.icon}</div>
+                      <div className="cyberpunk-project-info">
+                        <h4 className="cyberpunk-project-name">{project.name}</h4>
+                        <p className="cyberpunk-project-description">{project.description}</p>
+                        <div className="cyberpunk-project-meta">
+                          <span className={`cyberpunk-project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+                            {project.status}
+                          </span>
+                          <span className="cyberpunk-project-tech">{project.tech}</span>
+                        </div>
+                      </div>
+                      <a 
+                        href={project.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="cyberpunk-project-link"
+                        title={`View ${project.name} on GitHub`}
+                      >
+                        🔗
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="cyberpunk-projects-footer">
+                  <a 
+                    href="https://github.com/yourusername" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="cyberpunk-view-all"
+                  >
+                    👀 VIEW ALL PROJECTS ON GITHUB
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -240,7 +346,7 @@ function App() {
 
       <footer className="app-footer">
         <div className="footer-content">
-          <p>Made with ❤️ for young learners | Learn Sentiment Analysis through storytelling</p>
+          <p>Made with ❤️ for young learners by Sumukh Goutam | Learn Sentiment Analysis through storytelling</p>
           <div className="footer-achievements">
             {userProgress.achievements.length > 0 && (
               <div className="achievement-badges">

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Vizura - AI Sentiment Analysis Adventure for young learners"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preload audio files for better performance -->
+    <link rel="preload" href="%PUBLIC_URL%/audio/hip-hop-detective-174661.mp3" as="audio" type="audio/mpeg">
+    <link rel="preload" href="%PUBLIC_URL%/audio/comedy-detective-127185.mp3" as="audio" type="audio/mpeg">
+    <link rel="preload" href="%PUBLIC_URL%/audio/the-best-detective-190125.mp3" as="audio" type="audio/mpeg">
+    
+    <title>🕵️‍♀️ Vizura - Emotion Detective</title>
+    
+    <style>
+      /* Loading spinner styles */
+      .loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-family: 'Arial', sans-serif;
+      }
+      
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Loading screen -->
+    <div id="loading-screen" class="loading-spinner">
+      <div>
+        <div class="spinner"></div>
+        <div class="loading-text">
+          <h2>🕵️‍♀️ Loading Emotion Detective...</h2>
+          <p>Preparing your AI learning adventure!</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- React app root -->
+    <div id="root"></div>
+    
+    <script>
+      // Hide loading screen when React app loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            setTimeout(function() {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

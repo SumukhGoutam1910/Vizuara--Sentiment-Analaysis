@@ -1,8 +1,20 @@
-const API_BASE_URL = 'http://localhost:5000/api/sentiment';
+import config from '../config/environment';
 
 class ApiService {
   constructor() {
-    this.baseURL = API_BASE_URL;
+    this.baseURL = config.apiBaseUrl;
+    this.backendURL = config.backendUrl;
+    this.healthURL = config.healthCheckUrl;
+    
+    // Log current environment configuration (only in development)
+    if (config.enableDebugMode) {
+      console.log('API Service Configuration:', {
+        baseURL: this.baseURL,
+        backendURL: this.backendURL,
+        healthURL: this.healthURL,
+        environment: config.environment
+      });
+    }
   }
 
   // Basic sentiment analysis
@@ -140,7 +152,7 @@ class ApiService {
   // Health check
   async healthCheck() {
     try {
-      const response = await fetch('http://localhost:5000/health');
+      const response = await fetch(this.healthURL);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

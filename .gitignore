@@ -14,6 +14,11 @@ yarn.lock
 .env.production.local
 config.env
 
+# Production environment templates (keep these for reference)
+.env.production
+backend/.env.production
+frontend/.env.production
+
 # Build outputs
 build/
 dist/

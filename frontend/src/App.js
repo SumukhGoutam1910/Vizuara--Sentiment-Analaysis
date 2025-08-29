@@ -15,6 +15,7 @@ import InteractiveCard, { StoryCard, ExerciseCard, AchievementCard, CharacterCar
 import Notification from './components/Notification';
 import BackgroundMusic from './components/BackgroundMusic';
 import apiService from './services/apiService';
+import soundManager, { playButtonClick } from './utils/soundUtils';
 
 function App() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -96,12 +97,14 @@ function App() {
   }, []);
 
   const goToNext = () => {
+    playButtonClick();
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const goToPrevious = () => {
+    playButtonClick();
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
@@ -120,6 +123,7 @@ function App() {
   };
 
   const toggleGame = () => {
+    playButtonClick();
     setShowGame(!showGame);
   };
 
@@ -153,6 +157,7 @@ function App() {
   ];
 
   const toggleProjectsDropdown = () => {
+    playButtonClick();
     setShowProjectsDropdown(!showProjectsDropdown);
   };
 
@@ -189,6 +194,7 @@ function App() {
           position={char.position}
           behavior={char.behavior}
           onClick={() => {
+            playButtonClick();
             // Add achievement or bonus when characters are clicked
             if (!userProgress.achievements.includes(`${char.type}Clicked`)) {
               updateProgress({
@@ -229,6 +235,17 @@ function App() {
                  apiStatus === 'checking' ? '⏳ Checking...' : '❌ AI Offline'}
               </span>
             </div>
+            
+            <button
+              className="btn btn-secondary sound-toggle"
+              onClick={() => {
+                playButtonClick();
+                soundManager.toggleSound();
+              }}
+              title={soundManager.isSoundOn() ? "Disable Button Sounds" : "Enable Button Sounds"}
+            >
+              {soundManager.isSoundOn() ? '🔊' : '🔇'}
+            </button>
             
             <button
               className="btn btn-secondary game-toggle"
@@ -273,7 +290,10 @@ function App() {
                   <h3 className="cyberpunk-title">🚀 MY PROJECTS</h3>
                   <button 
                     className="cyberpunk-close"
-                    onClick={toggleProjectsDropdown}
+                    onClick={() => {
+                      playButtonClick();
+                      toggleProjectsDropdown();
+                    }}
                     title="Close Projects Menu"
                   >
                     ✕
@@ -332,7 +352,10 @@ function App() {
             />
             <button
               className="btn btn-secondary close-game"
-              onClick={toggleGame}
+              onClick={() => {
+                playButtonClick();
+                toggleGame();
+              }}
             >
               ✕ Close Game
             </button>

@@ -205,6 +205,30 @@
   box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
 }
 
+.sound-toggle {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.sound-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+  background: linear-gradient(135deg, #45a049, #4CAF50);
+}
+
+.sound-toggle:active {
+  transform: translateY(0) scale(0.98);
+}
+
 /* Cyberpunk Projects Dropdown Styles */
 .projects-dropdown {
   position: absolute;

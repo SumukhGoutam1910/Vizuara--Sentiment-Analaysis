@@ -30,8 +30,8 @@ function App() {
   const [showGame, setShowGame] = useState(false);
   const [floatingCharacters, setFloatingCharacters] = useState([]);
   const [apiStatus, setApiStatus] = useState('checking');
-  const [showNotification, setShowNotification] = useState(true);
   const [showProjectsDropdown, setShowProjectsDropdown] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   const steps = [
     { component: Welcome, title: "Welcome to Emotion Detective!", theme: 'story' },
@@ -81,6 +81,20 @@ function App() {
     checkApiConnection();
   }, []);
 
+  // Initialize notifications
+  useEffect(() => {
+    setNotifications([
+      {
+        message: "Due to free use of render the Gemini API calls may get delayed due to instance spin down after inactivity!",
+        type: "red"
+      },
+      {
+        message: "Music Player auto start removed for optimisation.",
+        type: "blue"
+      }
+    ]);
+  }, []);
+
   const goToNext = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -116,37 +130,26 @@ function App() {
   // Projects data for the dropdown
   const projects = [
     {
-      name: "Vizura - AI Sentiment Analysis",
-      description: "Interactive learning platform for 6th graders",
+      name: "Karnaugh Map Solver",
+      description: "A tool for Electronics engineers to solve Karnaugh maps for boolean algebra",
       status: "Active",
-      tech: "React, Node.js, Gemini AI",
-      url: "https://github.com/yourusername/vizura",
-      icon: "🕵️‍♀️"
+      tech: "Python, Flask, JS, HTML, CSS",
+      url: "https://kmapsolver.com",
     },
     {
-      name: "Project Alpha",
-      description: "Advanced machine learning algorithms",
+      name: "ECE Department Website",
+      description: "A website for the ECE Department of the PICT college",
       status: "In Development",
-      tech: "Python, TensorFlow, React",
-      url: "https://github.com/yourusername/project-alpha",
-      icon: "🤖"
+      tech: "React, Node.js, MongoDB, CSS",
+      url: "#",
     },
     {
-      name: "DataViz Dashboard",
-      description: "Real-time data visualization platform",
+      name: "Smart Biometric Attendance System",
+      description: "A system for biometric attendance using fingerprint integrated with a smart web dashboard",
       status: "Completed",
-      tech: "D3.js, Node.js, MongoDB",
-      url: "https://github.com/yourusername/dataviz-dashboard",
-      icon: "📊"
+      tech: "React, Node.js, MongoDB, CSS, Embedded C",
+      url: "#",
     },
-    {
-      name: "EcoTracker",
-      description: "Environmental impact monitoring app",
-      status: "Planning",
-      tech: "Flutter, Firebase, IoT",
-      url: "https://github.com/yourusername/ecotracker",
-      icon: "🌱"
-    }
   ];
 
   const toggleProjectsDropdown = () => {
@@ -157,12 +160,13 @@ function App() {
 
   return (
     <div className="App">
-      {/* Notification */}
-      <Notification
-        message="Due to free use of render the Gemini API calls may get delayed due to instance spin down after inactivity!"
-        isVisible={showNotification}
-        onClose={() => setShowNotification(false)}
-      />
+              {/* Notification */}
+        <Notification
+          notifications={notifications}
+          onClose={(index) => {
+            setNotifications(prev => prev.filter((_, i) => i !== index));
+          }}
+        />
 
       {/* Background Music */}
       <BackgroundMusic />
